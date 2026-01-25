@@ -287,13 +287,37 @@ li {
 }
 
 /* ===================================
+   Page Hero Banners
+   =================================== */
+
+.page-hero {
+    /* Images from Unsplash (royalty-free):
+       https://unsplash.com/photos/xrVDYwRE2q0 - Professional team/awards
+       Used with Unsplash License (free for all uses)
+    */
+    box-shadow: var(--shadow);
+}
+
+/* ===================================
    Hero Section
    =================================== */
 
 .hero {
-    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    background: linear-gradient(135deg, rgba(248, 249, 250, 0.95) 0%, rgba(255, 255, 255, 0.95) 100%), 
+                url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1600&h=900&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     padding: var(--spacing-3xl) var(--spacing-md);
     border-bottom: 1px solid var(--border-color);
+}
+
+body.dark-mode .hero {
+    background: linear-gradient(135deg, rgba(45, 45, 45, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%), 
+                url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1600&h=900&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 .hero-content {
@@ -375,6 +399,52 @@ li {
     .profile-photo {
         width: 150px;
         height: 150px;
+    }
+}
+
+/* ===================================
+   Page Banners
+   =================================== */
+
+.page-banner {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding: var(--spacing-3xl) var(--spacing-md);
+    margin-bottom: var(--spacing-2xl);
+    border-bottom: 1px solid var(--border-color);
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.page-banner h1 {
+    position: relative;
+    z-index: 2;
+    color: white;
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .page-banner {
+        padding: var(--spacing-2xl) var(--spacing-md);
+        min-height: 200px;
+    }
+
+    .page-banner h1 {
+        font-size: 1.75rem;
     }
 }
 
