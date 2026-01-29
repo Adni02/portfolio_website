@@ -26,7 +26,7 @@ export default function Home() {
                   View Publications
                 </Link>
                 <a
-                  href="/portfolio_website/data/Priyanka%20Singh_CV_2026_Updated%20Jan%2023.pdf"
+                  href="/priyankasingh/data/Priyanka%20Singh_CV_2026_Updated%20Jan%2023.pdf"
                   download
                   className="btn-secondary"
                 >
@@ -36,7 +36,7 @@ export default function Home() {
             </div>
             <div className="relative">
               <img
-                src="/portfolio_website/data/33FAD25E-02D6-4FF0-92AC-F9C018FF70B6_1_105_c.jpeg"
+                src="/priyankasingh/data/33FAD25E-02D6-4FF0-92AC-F9C018FF70B6_1_105_c.jpeg"
                 alt="Dr. Priyanka Singh"
                 className="rounded-lg shadow-2xl w-full h-auto object-cover"
               />

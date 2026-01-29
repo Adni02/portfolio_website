@@ -79,7 +79,7 @@ export default function Talks() {
             Dr. Singh is available for invited talks, keynote presentations, and panel discussions
             on topics related to nanomedicine, biomaterials, cancer therapy, and antimicrobial applications.
           </p>
-          <a href="/portfolio_website/contact" className="btn-primary">
+          <a href="/priyankasingh/contact" className="btn-primary">
             Send Speaking Invitation
           </a>
         </div>

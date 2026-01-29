@@ -182,7 +182,7 @@ export default function Supervision() {
             Interested in pursuing PhD or Postdoctoral research in nanomedicine and biomaterials?
             I'm always looking for motivated researchers to join the team.
           </p>
-          <a href="/portfolio_website/contact" className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-lg font-medium rounded-md text-white hover:bg-white hover:text-primary transition-colors">
+          <a href="/priyankasingh/contact" className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-lg font-medium rounded-md text-white hover:bg-white hover:text-primary transition-colors">
             Express Interest
           </a>
         </div>

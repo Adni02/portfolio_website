@@ -19,7 +19,7 @@ export default function Publications() {
 
   useEffect(() => {
     // Load and parse CSV file
-    fetch('/portfolio_website/data/scholar_publications_dom.csv')
+    fetch('/priyankasingh/data/scholar_publications_dom.csv')
       .then(response => response.text())
       .then(csvText => {
         const rows = csvText.split('\n')
