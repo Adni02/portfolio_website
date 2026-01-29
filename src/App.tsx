@@ -14,7 +14,7 @@ import Contact from './pages/Contact'
 
 function App() {
   return (
-    <Router basename="/portfolio_website">
+    <Router basename="/priyankasingh">
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
