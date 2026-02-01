@@ -13,9 +13,11 @@ interface Publication {
 export default function Publications() {
   const [publications, setPublications] = useState<Publication[]>([])
   const [filteredPublications, setFilteredPublications] = useState<Publication[]>([])
+  const [displayedPublications, setDisplayedPublications] = useState<Publication[]>([])
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedYear, setSelectedYear] = useState('')
   const [loading, setLoading] = useState(true)
+  const [displayCount, setDisplayCount] = useState(25)
 
   useEffect(() => {
     // Load and parse CSV file
@@ -102,7 +104,17 @@ export default function Publications() {
     }
 
     setFilteredPublications(filtered)
+    setDisplayCount(25) // Reset display count when filters change
   }, [searchTerm, selectedYear, publications])
+
+  // Update displayed publications when filter or display count changes
+  useEffect(() => {
+    setDisplayedPublications(filteredPublications.slice(0, displayCount))
+  }, [filteredPublications, displayCount])
+
+  const handleLoadMore = () => {
+    setDisplayCount(prev => prev + 25)
+  }
 
   // Get unique years for filter
   const years = Array.from(new Set(publications.map(pub => pub.year)))
@@ -123,11 +135,11 @@ export default function Publications() {
   return (
     <div>
       {/* Header */}
-      <section className="bg-gradient-to-br from-blue-50 to-white py-16">
+      <section className="bg-gradient-to-br from-purple-50 via-white to-gray-50 py-24">
         <div className="section-container">
-          <h1 className="text-center mb-4">Publications</h1>
-          <p className="text-center text-xl text-gray-600 max-w-3xl mx-auto">
-            {publications.length} peer-reviewed publications with {publications.reduce((sum, pub) => sum + parseInt(pub.citation || '0'), 0).toLocaleString()}+ citations
+          <h1 className="text-center mb-6">Publications</h1>
+          <p className="text-center text-lg text-gray-600 max-w-3xl mx-auto">
+            <span className="font-semibold text-primary">{publications.length}</span> peer-reviewed publications with <span className="font-semibold text-accent">{publications.reduce((sum, pub) => sum + parseInt(pub.citation || '0'), 0).toLocaleString()}+</span> citations
           </p>
         </div>
       </section>
@@ -135,11 +147,11 @@ export default function Publications() {
       {/* Filters */}
       <section className="section-container bg-white">
         <div className="max-w-5xl mx-auto">
-          <div className="card mb-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="card mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Search */}
               <div className="md:col-span-2">
-                <label htmlFor="search" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="search" className="block text-sm font-semibold text-gray-900 mb-3">
                   Search Publications
                 </label>
                 <input
@@ -148,20 +160,20 @@ export default function Publications() {
                   placeholder="Search by title, author, or journal..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                 />
               </div>
 
               {/* Year Filter */}
               <div>
-                <label htmlFor="year" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="year" className="block text-sm font-semibold text-gray-900 mb-3">
                   Filter by Year
                 </label>
                 <select
                   id="year"
                   value={selectedYear}
                   onChange={(e) => setSelectedYear(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                 >
                   <option value="">All Years</option>
                   {years.map(year => (
@@ -171,38 +183,64 @@ export default function Publications() {
               </div>
             </div>
 
-            <div className="mt-4 text-sm text-gray-600">
-              Showing {filteredPublications.length} of {publications.length} publications
+            <div className="mt-6 pt-4 border-t border-gray-200 flex justify-between items-center">
+              <p className="text-sm font-medium text-gray-600">
+                Showing <span className="text-primary font-semibold">{filteredPublications.length}</span> of <span className="text-primary font-semibold">{publications.length}</span> publications
+              </p>
+              {(searchTerm || selectedYear) && (
+                <button
+                  onClick={() => {
+                    setSearchTerm('')
+                    setSelectedYear('')
+                  }}
+                  className="text-sm text-primary hover:text-primary-dark font-medium transition-colors"
+                >
+                  Clear filters →
+                </button>
+              )}
             </div>
           </div>
 
           {/* Publications List */}
-          <div className="space-y-6">
-            {filteredPublications.map((pub, index) => (
-              <div key={index} className="card hover:shadow-xl transition-shadow">
-                <div className="flex flex-col">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                    {pub.title}
-                  </h3>
+          <div className="space-y-4">
+            {displayedPublications.map((pub, index) => (
+              <div key={index} className="card card-hover group transition-all duration-300 hover:border-primary/50">
+                <div className="flex flex-col gap-3">
+                  <a
+                    href={pub.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group-hover:text-primary transition-colors"
+                  >
+                    <h3 className="text-lg font-semibold text-gray-900 group-hover:text-primary transition-colors">
+                      {pub.title}
+                    </h3>
+                  </a>
                   
-                  <p className="text-sm text-gray-600 mb-2">
+                  <p className="text-sm text-gray-600 font-medium">
                     {pub.author}
                   </p>
                   
-                  <p className="text-gray-700 mb-3">
-                    <span className="italic">{pub.journal}</span>
+                  <div className="flex flex-wrap items-center gap-2 text-sm text-gray-700">
+                    <span className="italic font-medium">{pub.journal}</span>
                     {pub.journal_issue && pub.journal_issue.trim() !== '' && (
-                      <span> {pub.journal_issue}</span>
+                      <>
+                        <span className="text-gray-400">•</span>
+                        <span>{pub.journal_issue}</span>
+                      </>
                     )}
                     {pub.year && pub.year.trim() !== '' && (
-                      <span className="ml-2 text-primary font-medium">({pub.year})</span>
+                      <>
+                        <span className="text-gray-400">•</span>
+                        <span className="text-primary font-semibold">{pub.year}</span>
+                      </>
                     )}
-                  </p>
+                  </div>
                   
-                  <div className="flex flex-wrap items-center gap-4">
+                  <div className="flex flex-wrap items-center gap-4 pt-2">
                     {pub.citation && pub.citation.trim() !== '' && parseInt(pub.citation) > 0 && (
-                      <span className="text-sm text-gray-600">
-                        <svg className="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-accent/10 text-accent rounded-full text-sm font-medium">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
                         {pub.citation} citations
@@ -213,10 +251,13 @@ export default function Publications() {
                       href={pub.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors text-sm font-medium"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-all duration-300 text-sm font-medium group-hover:shadow-md"
                     >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
                       Read Paper
-                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                       </svg>
                     </a>
@@ -226,23 +267,58 @@ export default function Publications() {
             ))}
           </div>
 
+          {/* Load More Button */}
+          {displayedPublications.length < filteredPublications.length && (
+            <div className="text-center mt-12">
+              <button
+                onClick={handleLoadMore}
+                className="btn-primary"
+              >
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+                Load More Publications ({filteredPublications.length - displayedPublications.length} remaining)
+              </button>
+            </div>
+          )}
+
           {filteredPublications.length === 0 && (
-            <div className="text-center py-12">
-              <svg className="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <div className="text-center py-16">
+              <svg className="w-20 h-20 text-gray-300 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <p className="text-gray-600 text-lg">No publications found matching your criteria.</p>
+              <p className="text-gray-600 text-lg mb-4">No publications found matching your criteria.</p>
               <button
                 onClick={() => {
                   setSearchTerm('')
                   setSelectedYear('')
                 }}
-                className="mt-4 text-primary hover:underline"
+                className="text-primary hover:text-primary-dark font-medium transition-colors"
               >
-                Clear filters
+                ← Clear filters and show all
               </button>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* Collaboration Banner */}
+      <section className="section-container">
+        <div className="max-w-4xl mx-auto card-accent bg-gradient-to-r from-purple-50 to-cyan-50 text-center py-12">
+          <h2 className="mb-6">Interested in Collaboration?</h2>
+          <p className="text-xl mb-8 text-gray-700 leading-relaxed">
+            Looking to collaborate on research projects, co-author publications, or discuss potential partnerships? 
+            Feel free to reach out.
+          </p>
+          <a 
+            href="mailto:prisi@dtu.dk"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-primary text-white rounded-full hover:bg-primary-dark transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            Get in Touch
+          </a>
         </div>
       </section>
     </div>

@@ -4,7 +4,7 @@ export default function Supervision() {
   return (
     <div>
       {/* Header */}
-      <section className="bg-gradient-to-br from-blue-50 to-white py-16">
+      <section className="bg-gradient-to-br from-purple-50 to-white py-16">
         <div className="section-container">
           <h1 className="text-center mb-4">Supervision & Teaching</h1>
           <p className="text-center text-xl text-gray-600 max-w-3xl mx-auto">
@@ -49,7 +49,7 @@ export default function Supervision() {
                       </svg>
                       {postdoc.period}
                       {postdoc.status && (
-                        <span className="ml-3 px-2 py-1 bg-blue-100 text-primary rounded text-xs font-medium">
+                        <span className="ml-3 px-2 py-1 bg-purple-100 text-primary rounded text-xs font-medium">
                           {postdoc.status}
                         </span>
                       )}
@@ -95,9 +95,9 @@ export default function Supervision() {
                           </svg>
                           {phd.period}
                         </>
-                      )}
+                      )}  
                       {phd.status && (
-                        <span className="ml-3 px-2 py-1 bg-blue-100 text-primary rounded text-xs font-medium">
+                        <span className="ml-3 px-2 py-1 bg-purple-100 text-primary rounded text-xs font-medium">
                           {phd.status}
                         </span>
                       )}
@@ -175,14 +175,17 @@ export default function Supervision() {
       </section>
 
       {/* Opportunities */}
-      <section className="bg-primary text-white section-container">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-white mb-6">Join Our Research Team</h2>
-          <p className="text-xl mb-8">
+      <section className="section-container">
+        <div className="max-w-4xl mx-auto card-accent bg-gradient-to-r from-purple-50 to-cyan-50 text-center py-12">
+          <h2 className="mb-6">Join Our Research Team</h2>
+          <p className="text-xl mb-8 text-gray-700 leading-relaxed">
             Interested in pursuing PhD or Postdoctoral research in nanomedicine and biomaterials?
             I'm always looking for motivated researchers to join the team.
           </p>
-          <a href="/priyankasingh/contact" className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-lg font-medium rounded-md text-white hover:bg-white hover:text-primary transition-colors">
+          <a 
+            href="/priyankasingh/contact"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-primary text-white rounded-full hover:bg-primary-dark transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+          >
             Express Interest
           </a>
         </div>

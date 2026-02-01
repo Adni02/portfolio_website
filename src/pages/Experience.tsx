@@ -4,7 +4,7 @@ export default function Experience() {
   return (
     <div>
       {/* Header */}
-      <section className="bg-gradient-to-br from-blue-50 to-white py-16">
+      <section className="bg-gradient-to-br from-purple-50 to-white py-16">
         <div className="section-container">
           <h1 className="text-center mb-4">Work Experience</h1>
           <p className="text-center text-xl text-gray-600 max-w-3xl mx-auto">

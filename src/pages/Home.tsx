@@ -2,43 +2,44 @@ import { Link } from 'react-router-dom'
 import cvData from '../data/cv_data.json'
 
 export default function Home() {
+
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-50 to-white py-20">
+      <section className="bg-gradient-to-br from-purple-50 via-white to-gray-50 pt-12 pb-20 md:pb-28">
         <div className="section-container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="animate-fade-up">
+              <h1 className="mb-6 leading-tight">
                 {cvData.personalInfo.name.replace(', PhD', '')}
               </h1>
-              <div className="text-xl text-gray-600 mb-6">
-                <p className="font-semibold text-primary">{cvData.personalInfo.title}</p>
-                <p className="mt-2">{cvData.personalInfo.department}</p>
-                <p>{cvData.personalInfo.section}</p>
-                <p className="font-medium mt-2">{cvData.personalInfo.institution}</p>
+              <div className="space-y-3 mb-8 text-lg">
+                <p className="text-primary font-semibold text-xl">{cvData.personalInfo.title}</p>
+                <p className="text-gray-700">{cvData.personalInfo.department}</p>
+                <p className="text-gray-600">{cvData.personalInfo.section}</p>
+                <p className="text-gray-700 font-medium">{cvData.personalInfo.institution}</p>
               </div>
-              <div className="flex flex-wrap gap-4 mt-8">
+              <div className="flex flex-wrap gap-4 mt-10">
                 <Link to="/research" className="btn-primary">
+                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
                   Explore Research
                 </Link>
                 <Link to="/publications" className="btn-secondary">
+                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C6.248 6.253 2 10.998 2 16.5S6.248 26.747 12 26.747s10-4.745 10-10.247S17.752 6.253 12 6.253z" />
+                  </svg>
                   View Publications
                 </Link>
-                <a
-                  href="/priyankasingh/data/Priyanka%20Singh_CV_2026_Updated%20Jan%2023.pdf"
-                  download
-                  className="btn-secondary"
-                >
-                  Download CV
-                </a>
               </div>
             </div>
-            <div className="relative">
+            <div className="relative animate-fade-up-delay-1">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl blur-3xl transform -translate-y-4" />
               <img
                 src="/priyankasingh/data/33FAD25E-02D6-4FF0-92AC-F9C018FF70B6_1_105_c.jpeg"
                 alt="Dr. Priyanka Singh"
-                className="rounded-lg shadow-2xl w-full h-auto object-cover"
+                className="relative rounded-2xl shadow-2xl w-full h-auto object-cover hover:shadow-3xl transition-shadow duration-300"
               />
             </div>
           </div>
@@ -48,40 +49,44 @@ export default function Home() {
       {/* Research Vision Snapshot */}
       <section className="section-container bg-white">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-center mb-8">Research Vision</h2>
-          <p className="text-lg text-gray-700 leading-relaxed text-center">
-            {cvData.researchVision}
+          <h2 className="text-center mb-12">Research Vision</h2>
+          <p className="text-lg text-gray-700 leading-relaxed text-center italic text-gray-600">
+            "{cvData.researchVision}"
           </p>
         </div>
       </section>
 
       {/* Key Metrics */}
-      <section className="bg-gray-50 section-container">
-        <h2 className="text-center mb-12">Research Impact</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div className="card text-center">
+      <section className="section-alt section-container">
+        <h2 className="text-center mb-16">Research Impact</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
+          <div className="card text-center bg-white">
             <div className="text-4xl font-bold text-primary mb-2">
               {cvData.bibliometrics.totalPublications}
             </div>
             <div className="text-gray-600">Publications</div>
+            <p className="text-xs text-gray-500 mt-2">Peer-reviewed articles</p>
           </div>
-          <div className="card text-center">
+          <div className="card text-center bg-white">
             <div className="text-4xl font-bold text-primary mb-2">
               {cvData.bibliometrics.totalCitations.toLocaleString()}+
             </div>
             <div className="text-gray-600">Citations</div>
+            <p className="text-xs text-gray-500 mt-2">Research impact</p>
           </div>
-          <div className="card text-center">
+          <div className="card text-center bg-white">
             <div className="text-4xl font-bold text-primary mb-2">
               {cvData.bibliometrics.hIndex}
             </div>
             <div className="text-gray-600">H-Index</div>
+            <p className="text-xs text-gray-500 mt-2">Academic contribution</p>
           </div>
-          <div className="card text-center">
+          <div className="card text-center bg-white">
             <div className="text-4xl font-bold text-primary mb-2">
               {cvData.bibliometrics.highestImpactFactor}
             </div>
             <div className="text-gray-600">Highest IF</div>
+            <p className="text-xs text-gray-500 mt-2">Top journal</p>
           </div>
         </div>
       </section>
@@ -89,21 +94,37 @@ export default function Home() {
       {/* Career Highlights */}
       <section className="section-container bg-white">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-center mb-8">Career Highlights</h2>
-          <p className="text-lg text-gray-700 leading-relaxed">
-            {cvData.careerHighlights}
-          </p>
+          <h2 className="text-center mb-10">Career Highlights</h2>
+          <div className="card-accent">
+            <p className="text-lg text-gray-700 leading-relaxed">
+              {cvData.careerHighlights}
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Scientific Excellence Areas */}
-      <section className="bg-blue-50 section-container">
-        <h2 className="text-center mb-12">Areas of Expertise</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="section-alt section-container">
+        <h2 className="text-center mb-16">Areas of Expertise</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {cvData.scientificExcellence.map((area, index) => (
-            <div key={index} className="card">
-              <h3 className="text-xl font-semibold text-primary mb-3">{area.area}</h3>
-              <p className="text-gray-700">{area.description}</p>
+            <div
+              key={index}
+              className="card card-hover transition-all duration-300"
+            >
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0">
+                  <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-primary/10 text-primary">
+                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{area.area}</h3>
+                  <p className="text-gray-600">{area.description}</p>
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -111,39 +132,55 @@ export default function Home() {
 
       {/* Recent Publications Highlight */}
       <section className="section-container bg-white">
-        <h2 className="text-center mb-12">Selected Recent Publications</h2>
-        <div className="max-w-5xl mx-auto space-y-6">
+        <h2 className="text-center mb-16">Selected Recent Publications</h2>
+        <div className="max-w-5xl mx-auto space-y-4">
           {cvData.selectedPublications.slice(0, 5).map((pub, index) => (
-            <div key={index} className="card">
-              <p className="text-sm text-gray-600 mb-2">{pub.authors}</p>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">{pub.title}</h3>
-              <p className="text-gray-700">
+            <div
+              key={index}
+              className="card card-hover group hover:border-primary/30 transition-all duration-300"
+            >
+              <p className="text-sm font-medium text-primary mb-2">{pub.authors}</p>
+              <h3 className="text-lg font-semibold text-gray-900 mb-3 group-hover:text-primary transition-colors">
+                {pub.title}
+              </h3>
+              <div className="flex flex-wrap items-center gap-3 text-sm text-gray-600">
                 <span className="italic">{pub.journal}</span>
-                {pub.volume && ` ${pub.volume}`}
-                {pub.pages && `, ${pub.pages}`}
-                {pub.year && ` (${pub.year})`}
+                {pub.volume && <span>Vol. {pub.volume}</span>}
+                {pub.pages && <span>pp. {pub.pages}</span>}
+                {pub.year && <span className="text-gray-500">({pub.year})</span>}
                 {pub.impactFactor && (
-                  <span className="ml-2 text-primary font-medium">IF: {pub.impactFactor}</span>
+                  <span className="ml-auto px-3 py-1 bg-primary/10 text-primary font-semibold rounded-full">
+                    IF: {pub.impactFactor}
+                  </span>
                 )}
-              </p>
+              </div>
             </div>
           ))}
         </div>
-        <div className="text-center mt-8">
+        <div className="text-center mt-12">
           <Link to="/publications" className="btn-primary">
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
             View All Publications
           </Link>
         </div>
       </section>
 
       {/* Call to Action */}
-      <section className="bg-primary text-white section-container">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-white mb-6">Interested in Collaboration?</h2>
-          <p className="text-xl mb-8">
+      <section className="section-container">
+        <div className="max-w-4xl mx-auto card-accent bg-gradient-to-r from-purple-50 to-cyan-50 text-center py-12">
+          <h2 className="mb-6">Interested in Collaboration?</h2>
+          <p className="text-xl mb-8 text-gray-700 leading-relaxed">
             I'm always open to discussing new research opportunities, collaborations, and PhD/Postdoc positions.
           </p>
-          <Link to="/contact" className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-lg font-medium rounded-md text-white hover:bg-white hover:text-primary transition-colors">
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-primary text-white rounded-full hover:bg-primary-dark transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
             Get in Touch
           </Link>
         </div>

@@ -4,7 +4,7 @@ export default function Research() {
   return (
     <div>
       {/* Header */}
-      <section className="bg-gradient-to-br from-blue-50 to-white py-16">
+      <section className="bg-gradient-to-br from-purple-50 to-white py-16">
         <div className="section-container">
           <h1 className="text-center mb-4">Research</h1>
           <p className="text-center text-xl text-gray-600 max-w-3xl mx-auto">
@@ -37,7 +37,7 @@ export default function Research() {
       </section>
 
       {/* Research Impact */}
-      <section className="bg-blue-50 section-container">
+      <section className="bg-purple-50 section-container">
         <h2 className="text-center mb-12">Research Impact Metrics</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
           <div className="card text-center bg-white">
@@ -96,6 +96,22 @@ export default function Research() {
               {para}
             </p>
           ))}
+        </div>
+      </section>
+
+      {/* Research Collaboration Banner */}
+      <section className="section-container">
+        <div className="max-w-4xl mx-auto card-accent bg-gradient-to-r from-purple-50 to-cyan-50 text-center py-12">
+          <h3 className="text-2xl font-bold mb-4">Interested in Research Collaboration?</h3>
+          <p className="text-gray-700 mb-6">
+            I'm always open to discussing potential research collaborations and innovative projects.
+          </p>
+          <a 
+            href="mailto:priyanka.singh@dal.ca?subject=Research Collaboration Inquiry"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-primary text-white rounded-full hover:bg-primary-dark transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+          >
+            Get in Touch
+          </a>
         </div>
       </section>
     </div>

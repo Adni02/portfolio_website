@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,21 +10,29 @@
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold;
+    @apply font-serif font-semibold text-gray-900;
   }
   
   h1 {
-    @apply text-4xl md:text-5xl;
+    @apply text-5xl md:text-6xl lg:text-7xl leading-tight;
   }
   
   h2 {
-    @apply text-3xl md:text-4xl;
+    @apply text-4xl md:text-5xl leading-tight;
   }
   
   h3 {
     @apply text-2xl md:text-3xl;
   }
   
+  h4 {
+    @apply text-xl md:text-2xl;
+  }
+  
+  p {
+    @apply leading-relaxed;
+  }
+
   a {
     @apply transition-colors duration-200;
   }
@@ -30,19 +40,84 @@
 
 @layer components {
   .section-container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16;
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28;
   }
   
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors;
+    @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-semibold rounded-lg text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all duration-200 shadow-md hover:shadow-lg;
   }
   
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors;
+    @apply inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-semibold rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all duration-200;
   }
-  
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 border border-primary text-base font-semibold rounded-lg text-primary bg-transparent hover:bg-purple-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all duration-200;
+  }
+
   .card {
-    @apply bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow;
+    @apply relative bg-white rounded-xl p-8 transition-all duration-300;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, #a855f7 0%, #06b6d4 50%, #9333ea 100%) border-box;
+    border: 1px solid transparent;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 16px -2px rgba(147, 51, 234, 0.15),
+                0 0 0 1px rgba(147, 51, 234, 0.1);
+    border-color: transparent;
+  }
+
+  .card-accent {
+    @apply card;
+    border-left: 3px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(to bottom, #a855f7, #06b6d4) border-box;
+  }
+
+  .card-accent:hover {
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(to bottom, #9333ea, #0891b2) border-box;
+  }
+
+  .card-hover {
+    @apply relative;
+  }
+
+  .section-alt {
+    @apply bg-gradient-to-b from-gray-50/50 to-transparent;
+  }
+
+  .fade-up {
+    @apply opacity-0 animate-fade-up;
+  }
+
+  .scroll-fade-up {
+    @apply opacity-0 translate-y-5;
+  }
+
+  /* Metric Card */
+  .metric-card {
+    @apply relative bg-white rounded-xl text-center p-8 transition-all duration-300;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, #a855f7 0%, #06b6d4 50%, #9333ea 100%) border-box;
+    border: 1px solid transparent;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  }
+
+  .metric-card:hover {
+    box-shadow: 0 8px 20px -4px rgba(147, 51, 234, 0.2),
+                0 0 0 1px rgba(147, 51, 234, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .metric-value {
+    @apply text-5xl md:text-6xl font-bold text-primary mb-3 transition-transform duration-300;
+  }
+
+  .metric-label {
+    @apply text-gray-600 font-medium text-lg;
   }
 }
 
@@ -66,4 +141,30 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-gray-500;
+}
+
+/* Page transition animation */
+main {
+  @apply animate-fade-in;
+}
+
+/* Scroll progress indicator */
+.scroll-progress {
+  @apply fixed top-0 left-0 h-1 bg-gradient-to-r from-primary to-accent z-50 origin-left transition-transform duration-300;
+  transform-origin: left;
+}
+
+/* Active navigation link underline */
+.nav-active::after {
+  @apply absolute bottom-0 left-0 right-0 h-1 bg-primary;
+  content: '';
+}
+
+/* Intersection observer animations */
+.animate-on-scroll {
+  @apply opacity-0 translate-y-5 transition-all duration-700;
+}
+
+.animate-on-scroll.in-view {
+  @apply opacity-100 translate-y-0;
 }
