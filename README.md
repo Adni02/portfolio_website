@@ -4,7 +4,7 @@ A visually captivating and feature-rich portfolio website representing the acade
 
 ## 🌐 Live Site
 
-Visit the updated live website here: [https://github.com/Adni02/priyankasingh](https://github.com/Adni02/priyankasingh)
+Visit the updated live website here: [https://adni02.github.io/priyankasingh/](https://adni02.github.io/priyankasingh/)
 
 ## ✨ Key Highlights
 
