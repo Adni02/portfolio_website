@@ -4,7 +4,7 @@ A visually captivating and feature-rich portfolio website representing the acade
 
 ## 🌐 Live Site
 
-Visit the updated live website here: [https://your-new-site-address.com](https://your-new-site-address.com)
+Visit the updated live website here: [https://github.com/Adni02/priyankasingh](https://github.com/Adni02/priyankasingh)
 
 ## ✨ Key Highlights
 
