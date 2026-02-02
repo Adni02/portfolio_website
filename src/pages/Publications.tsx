@@ -376,7 +376,7 @@ export default function Publications() {
           <div className="flex gap-8">
             {/* Left Sidebar - Desktop */}
             <aside className="hidden lg:block w-80 flex-shrink-0">
-              <div className="sticky top-24"><Sidebar /></div>
+              <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto"><Sidebar /></div>
             </aside>
 
             {/* Right: Publications List */}
